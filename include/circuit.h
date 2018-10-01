@@ -48,6 +48,7 @@ private:
 
 // Single qbit gates for now
 bool addX( Circuit &circuit, qbit_t qbit, uint32_t time );
+bool addCX( Circuit &circuit, qbit_t qbit, qbit_t control, uint32_t time );
 bool addY( Circuit &circuit, qbit_t qbit, uint32_t time );
 bool addZ( Circuit &circuit, qbit_t qbit, uint32_t time );
 bool addID( Circuit &circuit, qbit_t qbit, uint32_t time );
