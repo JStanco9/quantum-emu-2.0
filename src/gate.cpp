@@ -107,27 +107,31 @@ State& IDGate::apply( State &state, const QbitList &qbits ) {
 
 
 State& CXGate::apply( State &state, const QbitList &qbits ) {
-  if( qbits.size() != 1 ) {
+  if( qbits.size() != 2 ) {
     throw "incorrect number of qbits";
   }
 
-  if( qbits[0] >= state.nqbits() ) {
+  if( qbits[0] >= state.nqbits() || qbits[1] >= state.nqbits() ) {
     throw "invalid qbit entered";
   }
 
   qbit_t n = state.nqbits();
   qbit_t m = qbits[0];
+  qbit_t ctrl = qbits[1];
 
   size_t stride = 1 << m;
-  size_t nStates = 1 << n;
+  size_t nStates = ( 1 << n ) - stride;
+  size_t ctrlMask = ( 1 << ctrl );
 
   for( size_t i = 0; i < nStates - stride; i += stride ) {
     size_t max = i + stride;
     for( ; i < max; ++i ) {
       // simply swap the bits
-      auto tmp = state[i];
-      state[i] = state[i + stride];
-      state[i + stride] = tmp;
+      if( ( i & ctrlMask ) >> ctrl ) {
+        auto tmp = state[i];
+        state[i] = state[i + stride];
+        state[i + stride] = tmp;
+      }
     }
   }
 

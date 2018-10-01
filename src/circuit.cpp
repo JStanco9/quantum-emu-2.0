@@ -106,6 +106,17 @@ bool addX( Circuit &circuit, qbit_t qbit, uint32_t time ) {
 }
 
 
+bool addCX( Circuit &circuit, qbit_t qbit, qbit_t control, uint32_t time ) {
+  auto cX = new CXGate;
+  if( circuit.addGate( cX, { qbit, control }, time ) ) {
+    return true;
+  }
+  delete cX;
+  return false;
+}
+
+
+
 bool addY( Circuit &circuit, qbit_t qbit, uint32_t time ) {
   //auto y = std::shared_ptr<YGate>( new YGate );
   auto y = new YGate;
