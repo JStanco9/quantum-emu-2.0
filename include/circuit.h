@@ -46,14 +46,24 @@ private:
   void apply( Gate *pGate, const QbitList &qbits );
 };
 
-// Single qbit gates for now
+// Single qbit gates
 bool addX( Circuit &circuit, qbit_t qbit, uint32_t time );
-bool addCX( Circuit &circuit, qbit_t qbit, qbit_t control, uint32_t time );
 bool addY( Circuit &circuit, qbit_t qbit, uint32_t time );
 bool addZ( Circuit &circuit, qbit_t qbit, uint32_t time );
+bool addS( Circuit &circuit, qbit_t qbit, uint32_t time );
+bool addSd( Circuit &circuit, qbit_t qbit, uint32_t time );
+bool addT( Circuit &circuit, qbit_t qbit, uint32_t time );
+bool addTd( Circuit &circuit, qbit_t qbit, uint32_t time );
 bool addID( Circuit &circuit, qbit_t qbit, uint32_t time );
 bool addH( Circuit &circuit, qbit_t qbit, uint32_t time );
-bool addPhase( Circuit &circuit, qbit_t qbit, double phase, uint32_t time );
-bool addCPhase( Circuit &circuit, qbit_t qbit, qbit_t control, double phase, uint32_t time );
+bool addU1( Circuit &circuit, qbit_t qbit, double phase, uint32_t time );
+bool addU2( Circuit &circuit, qbit_t qbit, double phi1, double phi2, uint32_t time );
+bool addU3( Circuit &circuit, qbit_t qbit, double phi1, double phi2, double phi3, uint32_t time );
+
+// Double qbit gates
+bool addCX( Circuit &circuit, qbit_t qbit, qbit_t control, uint32_t time );
+bool addCU1( Circuit &circuit, qbit_t qbit, qbit_t control, double phase, uint32_t time );
+bool addCU2( Circuit &circuit, qbit_t qbit, qbit_t control, double phi1, double phi2, uint32_t time );
+bool addCU3( Circuit &circuit, qbit_t qbit, qbit_t control, double phi1, double phi2, double phi3, uint32_t time );
 
 #endif /* QUANTUM_EMU_CIRCUIT_h */

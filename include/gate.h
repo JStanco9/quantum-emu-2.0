@@ -4,12 +4,14 @@
 #include <cstdint>
 #include <stdexcept>
 #include <iostream>
+#include <complex>
 
 #ifndef QUANTUM_EMU_GATE_H
 #define QUANTUM_EMU_GATE_H
 
 
 typedef unsigned int qbit_t;
+typedef std::complex<double> cx_double;
 typedef std::vector<qbit_t> QbitList;
 class State;
 
@@ -64,49 +66,18 @@ struct GateComparator {
   }
 };
 
-class XGate : public Gate {
+class UGate : public Gate {
+  cx_double u00, u01, u10, u11;
 public:
   State& apply( State &state, const QbitList &qbits );
+  UGate( double phi1, double phi2, double phi3 );
 };
 
-class YGate : public Gate {
+class CUGate : public Gate {
+  cx_double u00, u01, u10, u11;
 public:
   State& apply( State &state, const QbitList &qbits );
-};
-
-class ZGate : public Gate {
-public:
-  State& apply( State &state, const QbitList &qbits );
-};
-
-class IDGate : public Gate {
-public:
-  State& apply( State &state, const QbitList &qbits );
-};
-
-class CXGate : public Gate {
-public:
-  State& apply( State &state, const QbitList &qbits );
-};
-
-// Hadamard Gate
-class HGate : public Gate {
-public:
-  State& apply( State &state, const QbitList &qbits );
-};
-
-class PhaseGate : public Gate {
-public:
-  double phase;
-  PhaseGate( double phi );
-  State& apply( State &state, const QbitList &qbits );
-};
-
-class CPhaseGate : public Gate {
-public:
-  double phase;
-  CPhaseGate( double phi );
-  State& apply( State &state, const QbitList &qbits );
+  CUGate( double phi1, double phi2, double phi3 );
 };
 
 #endif /* QUANTUM_EMU_GATE_H */
