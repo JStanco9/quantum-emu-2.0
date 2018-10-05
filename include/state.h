@@ -1,6 +1,5 @@
 // John Stanco 9.29.18
 
-
 #include <stdexcept>
 #include <complex>
 #include <vector>
